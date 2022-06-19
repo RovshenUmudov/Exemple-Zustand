@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import useStore from "./store/store";
+import {Item} from "./store/store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './App.css'
+
+const App = () => {
+
+    const {items, fetchItem, removeItem, loading} = useStore(state => state)
+
+    return (
+        <div>
+            <div className={`button-wrap ${loading ? 'loading' : ''}`}>
+                <button onClick={fetchItem}>Load Item</button>
+            </div>
+
+            <div className="images">
+                {
+                    items.map((el: Item) => (
+                        <div className={"item"} key={el.id} data-id={el.id}>
+                            <img src={el.url} alt={el.title}/>
+                            <button onClick={() => removeItem(el.id)}>Remove</button>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    );
+};
 
 export default App;
