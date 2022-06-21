@@ -47,7 +47,7 @@ const useStore = create(
         }),
         {
             name: 'storage',
-            getStorage: () => sessionStorage, // (optional) by default, 'localStorage' is used
+            getStorage: () => sessionStorage, // (optional) by default, 'localStorage'
         }
     )
 )
